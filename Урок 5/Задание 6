@@ -18,6 +18,8 @@
 print('Введите число')
 num = int(input())
 if 0 <= num <= 36:
+    if num == 0:
+        print('зеленый')
     if 1 <= num <= 10:
         if num % 2 == 0:
             print('черный')
@@ -25,9 +27,9 @@ if 0 <= num <= 36:
             print('красный')
     if 11 <= num <= 18:
         if num % 2 == 0:
-            print('черный')
-        else:
             print('красный')
+        else:
+            print('черный')
     if 19 <= num <= 28:
         if num % 2 == 0:
             print('черный')
@@ -35,8 +37,9 @@ if 0 <= num <= 36:
             print('красный')
     if 29 <= num <= 36:
         if num % 2 == 0:
-            print('черный')
-        else:
             print('красный')
+        else:
+            print('черный')
 else:
     print('ошибка ввода')
+
