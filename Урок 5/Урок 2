@@ -1,0 +1,9 @@
+print('Введите число')
+num = float(input())
+if num > 0:
+    print('Положительное')
+else:
+    if num < 0:
+        print('Отрицательное')
+    else:
+        print('Ноль')
