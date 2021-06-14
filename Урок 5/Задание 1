@@ -1,7 +1,7 @@
 print('Введите пароль')
-pass1 = (input())
+pass1 = int(input())
 print('Подтвердите пароль')
-pass2 = (input())
+pass2 = int(input())
 if pass1 == pass2:
     print('Все окей!')
 else:
