@@ -22,3 +22,14 @@ if 'Glo Academy' in a:
     print('YES')
 else:
     print('NO')
+
+
+
+Захотелось автоматизировать чуть чуть
+
+a = input()
+b = input()
+if b in a:
+    print('YES')
+else:
+    print('NO')
