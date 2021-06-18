@@ -17,7 +17,7 @@ YES
 NO
 
 
-a = input()
+ a = input('Введите текст поста: ')
 if 'Glo Academy' in a:
     print('YES')
 else:
