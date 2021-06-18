@@ -1,1 +1,10 @@
-
+print('Введите первое число')
+a = int(input())
+print('Введите второе число')
+b = int(input())
+if a < b:
+        for i in range(a + a % 2, b + 1, 2):
+                print(i)
+elif a > b:
+        for i in range(b + b % 2, a + 1, 2):
+                print(i)
