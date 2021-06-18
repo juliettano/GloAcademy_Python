@@ -1,6 +1,6 @@
 print('Введите адрес электронной почты')
-mail = input()
-if '@' and '.' in mail:
+email = input()
+if '@' in email and '.' in email:
     print('Корректный')
 else:
     print('Некорректный')
