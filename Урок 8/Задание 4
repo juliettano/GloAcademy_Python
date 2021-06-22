@@ -1,0 +1,10 @@
+n = int(input())
+if n >= 10:
+    b = str(n)
+
+    while b == 0:
+        last_digit = b % 10
+        b = b // 10
+
+print(max(b))
+print(min(b))
