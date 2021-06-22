@@ -18,8 +18,8 @@ maximum = 0
 minimum = 9
 if n >= 0:
    b = n
-   
-   while b == 0:
+
+   while b != 0:
        last_digit = b % 10
        if last_digit > maximum:
           maximum = last_digit
