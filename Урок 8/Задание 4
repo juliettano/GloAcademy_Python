@@ -24,7 +24,7 @@ if n >= 0:
        if last_digit > maximum:
           maximum = last_digit
        if last_digit < minimum:
-          mimimum = last_digit
+          minimum = last_digit
 
        b = b // 10
 
