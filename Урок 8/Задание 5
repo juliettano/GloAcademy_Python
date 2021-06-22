@@ -1,0 +1,15 @@
+n = int(input())
+counter1 = 0
+counter2 = 0
+total = 1
+
+while n != 0:
+    if n > 0:
+        counter1 = 1
+    elif n < 0:
+        counter2 = 1
+        
+    n = int(input())
+    
+total *= counter1 + counter1
+print(total)
