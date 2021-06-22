@@ -8,3 +8,24 @@ if n >= 10:
 
 print(max(b))
 print(min(b))
+
+
+
+2-й вариант 
+
+n = int(input())
+maximum = 0
+minimum = 9
+if n >= 0:
+   b = n
+   
+   while b == 0:
+       last_digit = b % 10
+       if last_digit > maximum:
+          maximum = last_digit
+       if last_digit < minimum:
+          mimimum = last_digit
+       b = b // 10
+
+print(minimum)
+print(maximum)
