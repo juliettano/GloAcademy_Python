@@ -25,7 +25,9 @@ if n >= 0:
           maximum = last_digit
        if last_digit < minimum:
           mimimum = last_digit
+
        b = b // 10
 
 print(minimum)
 print(maximum)
+
