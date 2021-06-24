@@ -3,10 +3,9 @@ counter = 0
 total = 0
 
 while n != 0:
-    if n > 0 or n < 0:
-        counter = counter + 1
-        total += n
+    counter = counter + 1
+    total += n
 
     n = int(input())
-    
+
 print(int(total / counter))
