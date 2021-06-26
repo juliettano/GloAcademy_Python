@@ -1,6 +1,5 @@
-s = str(input())
-s = s.isdigit ()
-if s == False:
-   print('NO')
-else:
+s = (input())
+if s.isdigit():
    print('YES')
+else:
+   print('NO')
