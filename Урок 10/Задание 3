@@ -1,7 +1,7 @@
-s = str(input())
-s = s.isupper()
-if s == False:
-   print('NO')
+s = (input())
+ord(s)
+if ord('А') <= ord(s) <= ord('Я'):
+    print('YES')
 else:
-   print('YES')
+    print('NO')
 
