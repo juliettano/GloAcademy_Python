@@ -1,8 +1,7 @@
 s = str(input())
-b = ord(s)
-
-if [192] <= s <= [223]:
-   print('YES')
-else:
+s = s.isupper()
+if s == False:
    print('NO')
+else:
+   print('YES')
 
