@@ -1,8 +1,6 @@
-s = str(input())
-b = ord('s')
-a = s.isupper()
-c = s.islower()
-if 65 <= b <= 91:
-   print(c)
+s = (input())
+ord(s)
+if ord('A') <= ord(s) <= ord('Z'):
+    print(s.lower())
 else:
-   print(a)
+    print(s.upper())
