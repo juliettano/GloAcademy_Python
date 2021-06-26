@@ -1,1 +1,10 @@
-
+num1 = (input())
+num2 = (input())
+num1 = ord(num1)
+num2 = ord(num2)
+if num1 > num2:
+    for i in range(num2, num1 + 1):
+        print(chr(i))
+if num2 > num1:
+    for i in range(num1, num2 + 1):
+        print(chr(i))
