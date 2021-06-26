@@ -1,8 +1,8 @@
-s = (str(input()))
-
+s = str(input())
+b = ord('s')
 a = s.isupper()
 c = s.islower()
-if chr(65) <= s <= chr(90):
-   print(b)
+if 65 <= b <= 91:
+   print(c)
 else:
    print(a)
