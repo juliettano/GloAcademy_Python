@@ -1,9 +1,14 @@
+print('Введите количество строк')
 n = int(input())
 list = []
 for i in range(n):
     string = input()
     list.append(string)
+print('Введите поисковый запрос')
 search = input()
 for j in list:
     if search.lower() in j.lower():
-        print(j)
+        print('Найден результат', ':', j)
+        
+else:
+    print('Результат не найден')
