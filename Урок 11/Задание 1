@@ -1,8 +1,6 @@
 n = int(input())
 list = []
-
-b=input()
-for j in list:
-    if b.lower() in j.lower():
-        print(j)
+for i in range(n):
+    string = input()
+    list.append(b)
 
