@@ -2,5 +2,8 @@ n = int(input())
 list = []
 for i in range(n):
     string = input()
-    list.append(n)
-
+    list.append(string)
+search = input()
+for j in list:
+    if search.lower() in j.lower():
+        print(j)
