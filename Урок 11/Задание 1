@@ -1,7 +1,7 @@
 n = int(input())
 list = []
 
-
+b=input()
 for j in list:
     if b.lower() in j.lower():
         print(j)
