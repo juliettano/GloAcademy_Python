@@ -1,1 +1,5 @@
+way = input()
+doc = way.split("\\")
+for i in range(len(doc)):
+    print(doc[i])
 
