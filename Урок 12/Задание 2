@@ -1,14 +1,10 @@
-def max3(a, b):
-    a = a.split(" ")
-    b = b.split(" ")
-    #print(max(a), max(b))
-    return max(a) * max(b)
+def max3(n):
+    list = max(n.split())
+    list = int(list)
+    return (list)
 
+print('Введите первое число')
 a = input()
+print('Введите второе число')
 b = input()
-print(max3(a, b))
-
-    
-n = input()
-list = max(n.split())
-print(int(list))
+print((max3(a)) * (max3(a)))
