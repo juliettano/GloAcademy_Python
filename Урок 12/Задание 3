@@ -24,7 +24,5 @@ def month_number(s):
     elif s == 12:
         print("31")
 
-    return s
-
-num = input()
+num = int(input())
 print(month_number(num))
