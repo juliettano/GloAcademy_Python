@@ -1,1 +1,30 @@
+def month_number(s):
+    if s == 1:
+        print("31")
+    elif s == 2:
+        print("29")
+    elif s == 3:
+        print("31")
+    elif s == 4:
+        print("30")
+    elif s == 5:
+        print("31")
+    elif s == 6:
+        print("30")
+    elif s == 7:
+        print("31")
+    elif s == 8:
+        print("31")
+    elif s == 9:
+        print("30")
+    elif s == 10:
+        print("31")
+    elif s == 11:
+        print("30")
+    elif s == 12:
+        print("31")
 
+    return s
+
+num = input()
+print(month_number(num))
