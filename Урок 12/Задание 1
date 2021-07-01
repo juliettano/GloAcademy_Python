@@ -1,1 +1,15 @@
 
+def print_comp(number):
+    counter = 0
+    while number > 0:
+        counter += number % 10
+        number = number // 10
+        
+    return (counter)
+
+print('Введите первое число')
+number_1 = int(input())
+print('Введите второе число')
+number_2 = int(input())
+print((print_comp(number_1)) + (print_comp(number_1)))
+
