@@ -1,12 +1,10 @@
-c = 0
-def maximum(c):
+def max3(a, b):
     a = a.split(" ")
     b = b.split(" ")
-    c = a * b
-    
-    return c
+    #print(max(a), max(b))
+    return max(a) * max(b)
 
 a = input()
 b = input()
-print(maximum(c))
+print(max3(a, b))
 
