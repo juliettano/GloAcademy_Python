@@ -1,3 +1,4 @@
+
 def max3(n):
     list = max(n.split())
     list = int(list)
@@ -5,6 +6,12 @@ def max3(n):
 
 print('Введите первое число')
 a = input()
+a = max3(list)
+def max3(n):
+    list = max(n.split())
+    list = int(list)
+    return (list)
 print('Введите второе число')
 b = input()
-print((max3(a)) * (max3(b)))
+b = max3(list)
+print(a*b)
