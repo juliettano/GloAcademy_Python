@@ -1,1 +1,11 @@
+def price(number):
+    if number > 1:
+        number = 100 + 50 * (number - 1)
+    else:
+        number = 100
+        
+    return (number)
 
+print('Введите количество товара')
+number = int(input())
+print('Стоимость доставки', price(number), 'рублей')
