@@ -1,1 +1,11 @@
 
+def print_max(a):
+        a = a.split(" ")
+        a = a.max()
+        for i in range(len(a)):
+        return a[i]
+
+print('Введите первое число')
+a = input()
+print(print_max(a))
+
