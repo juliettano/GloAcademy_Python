@@ -8,3 +8,8 @@ a = input()
 b = input()
 print(max3(a, b))
 
+я не понимаю как вывести функцией max число
+n = input()
+list = n.split()
+for i in list:
+    print(max(int(i)))
