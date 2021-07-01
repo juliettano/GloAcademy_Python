@@ -1,11 +1,12 @@
+c = 0
+def maximum(c):
+    a = a.split(" ")
+    b = b.split(" ")
+    c = a * b
+    
+    return c
 
-def print_max(a):
-        a = a.split(" ")
-        a = a.max()
-        for i in range(len(a)):
-        return a[i]
-
-print('Введите первое число')
 a = input()
-print(print_max(a))
+b = input()
+print(maximum(c))
 
