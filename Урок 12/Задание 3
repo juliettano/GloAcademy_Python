@@ -25,4 +25,4 @@ def month_number(s):
         print("31")
 
 num = int(input())
-print(month_number(num))
+month_number(num)
