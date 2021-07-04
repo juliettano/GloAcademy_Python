@@ -1,8 +1,9 @@
 import random
-number = input("Введите загаданное вами число в диапазоне от 0 до 100: ")
+print("Введите загаданное вами число в диапазоне от 0 до 100")
+user_input = int(input())
 x = 0
 y = 100
-counter = 0
+counter = 1
 computer_number = random.randrange(x, y + 1)
 while x != y:
     print("Ваше число равно,больше или меньше:", computer_number)
@@ -11,12 +12,13 @@ while x != y:
     if 'больше' in answer:
             x = computer_number
             computer_number = random.randrange(x, y)
-            counter = +1
+            counter += 1
     elif 'меньше' in answer:
             y=computer_number
             computer_number = random.randrange(x, y)
-            counter = +1
+            counter += 1
     elif 'равно' in answer:
             break
-print('Ваше число:', number, 'кол-во попыток:', counter)
+print('Ваше число:', user_input, 'кол-во попыток:', counter)
+
 
