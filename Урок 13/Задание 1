@@ -13,22 +13,22 @@ def is_valid(user_input):
 
 secret_number = random.randint(1, 100)
 print('Добро пожаловать в игру "Угадай число"')
-
+counter = 0
 while True:
     print('Введите число от 1 до 100')
     user_input = input()
-
+    counter += 1
     if not is_valid(user_input):
         continue
     
     user_number = int(user_input)
-    
+
     if secret_number > user_number:
         print('Загаданное число больше, чем введенное вами число')
     elif secret_number < user_number:
         print('Загаданное число меньше, чем введенное вами число')
     else:
-        print('УРА! Вы угадали загаданное число!')
+        print('УРА! Вы угадали загаданное число за', counter, 'попыток')
         break
 
 print('Спасибо за игру. Ждем вас еще!')
