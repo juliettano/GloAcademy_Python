@@ -1,1 +1,22 @@
+import random
+number = input("Введите загаданное вами число в диапазоне от 0 до 100: ")
+x = 0
+y = 100
+counter = 0
+computer_number = random.randrange(x, y + 1)
+while x != y:
+    print("Ваше число равно,больше или меньше:", computer_number)
+    answer = input()
+    answer = answer.lower()
+    if 'больше' in answer:
+            x = computer_number
+            computer_number = random.randrange(x, y)
+            counter = +1
+    elif 'меньше' in answer:
+            y=computer_number
+            computer_number = random.randrange(x, y)
+            counter = +1
+    elif 'равно' in answer:
+            break
+print('Ваше число:', number, 'кол-во попыток:', counter)
 
