@@ -35,5 +35,7 @@ def main():
     play_again = input()
     if "y" in play_again:
         main()
+    elif "n" in play_again:
+        print('Приходите еще!')
     
 main()
