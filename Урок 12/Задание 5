@@ -1,1 +1,11 @@
-
+def star_date(a):
+    a = a.split(".")
+    for i in range(len(a)):
+        if(int(a[0]) * int(a[1]) == (int(a[2]) % 100)):
+            print('TRUE')
+        else:
+            print('FALSE')
+            
+print('Введите дату рождения')
+date = input()
+star_date(date)
