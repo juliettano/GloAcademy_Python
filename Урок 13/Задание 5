@@ -1,6 +1,5 @@
 import random
-print("Введите загаданное вами число в диапазоне от 0 до 100")
-user_input = int(input())
+print('Добро пожаловать в игру "Угадай число"! Загадайте число, а я буду его отгадывать')
 x = 0
 y = 100
 counter = 1
@@ -19,6 +18,6 @@ while x != y:
             counter += 1
     elif 'равно' in answer:
             break
-print('Ваше число:', user_input, 'кол-во попыток:', counter)
+print('Ваше число:', computer_number, 'кол-во попыток:', counter)
 
 
