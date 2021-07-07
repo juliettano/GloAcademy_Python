@@ -59,10 +59,9 @@ for j in range(number):
 
 
 print('Сгенерировать еще один пароль? Введите Да или Нет')
-again = input().lower()
+again = input()
 if again == 'Да':
     password = generate_password(lenght, enabled_chars)
     print(password)    
 else:
     print('Были рады вам помочь!')
-    
