@@ -1,4 +1,11 @@
-while True: 
+  
+while True:
+    def validate(play):
+        if play == 'y' or play == 'n':
+            return True
+        else:
+            return False
+        
     import random
     def is_valid(user_input):
         if user_input.isdigit():
@@ -34,8 +41,13 @@ while True:
             break
 
     print('Хотите сыграть в игру? Введите y или n')
+    play = input()
+    if not validate(play):
+        continue
     play_again = input()
     if "y" in play_again:
         continue
     else:
         break
+
+    
