@@ -53,7 +53,7 @@ if russian_uppercase_enabled:
 if punctuations_enabled:
     enabled_chars += punctuations
 
-password = generate_password(lenght, enabled_chars)
-
-print(password)
+for j in range(number):
+    password = generate_password(lenght, enabled_chars)
+    print(password)
 
