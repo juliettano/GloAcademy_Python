@@ -1,5 +1,6 @@
 import random
-
+print('Привет. Я генератор паролей.\nЯ задам пару уточняющих вопросов, на основе которых сгенерирую пароль.\nДавай начнем')
+number = int(input('Сколько пароль вы хотите сгенерировать?' + "\n"))
 def ask_question(question):
     print(question, 'Нажмите Да или Нет')
     answer = input()
@@ -9,11 +10,12 @@ def ask_question(question):
         return False
 
 def generate_password(lenght, chars):
-    password = ''
-    for i in range(lenght):
-        random_index = random.randint(0, len(chars) - 1)
-        password += chars[random_index]
-    return password
+    for n in range(number):
+        password = ''
+        for i in range(lenght):
+            random_index = random.randint(0, len(chars) - 1)
+            password += chars[random_index]
+        return password
 
 print('Привет. Я генератор паролей.\nЯ задам пару уточняющих вопросов, на основе которых сгенерирую пароль.\nДавай начнем')
 
@@ -56,3 +58,4 @@ if punctuations_enabled:
 password = generate_password(lenght, enabled_chars)
 
 print(password)
+
