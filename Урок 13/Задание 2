@@ -32,10 +32,10 @@ while True:
     else:
         print('УРА! Вы угадали загаданное число за', counter, 'попыток')
         print('Хотите сыграть в игру? Введите y или n')
-        play_again = input()
-        if "n" in play_again:
+        play_again = input().lower()
+        if play_again == 'n':
             break
-        elif "y" in play_again:
+        if play_again == 'y':
             counter = 0
             secret_number = random.randint(1, n)
             continue
@@ -43,3 +43,4 @@ while True:
             print('Неизвестное значение, игра прекращена')
             break
 print('Спасибо за игру!')
+    
