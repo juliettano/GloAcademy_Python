@@ -8,12 +8,19 @@ def update_user_word(secret_word, user_word, char):
     return new_user_word
 
 counter = 0
+alphabet = ["а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я"]
 secret_word='академия'
 user_word='********'
 while user_word != secret_word:
     print('Введите букву')
     user_char = input().lower()
-    counter += 1
+    if user_char not in alphabet:
+        continue
+    if new_user_word.count(user_char):
+        counter = counter - 1
+        print('Буква уже была введен ранее')
+    else:
+        counter += 1
     if len(user_char) != 1:
         continue
 
@@ -29,3 +36,11 @@ while user_word != secret_word:
     print(user_word)
 
 print('Ура, вы угадали загаданное слово за', counter, 'попыток')
+
+print('Хотите сыграть еще раз? Введите да или нет')
+again = input().lower()
+if again == 'да':
+    user_char = input().lower()
+    counter = 0   
+else:
+    print('Спасибо за игру!')
