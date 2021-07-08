@@ -9,6 +9,7 @@ def is_valid(valid):
         return False
 import random
 print('Привет. Я генератор паролей.\nЯ задам пару уточняющих вопросов, на основе которых сгенерирую пароль.\nДавай начнем')
+flag = 0
 while True:
     print('Сколько паролeй вы хотите сгенерировать?')
     valid = input()
@@ -16,12 +17,13 @@ while True:
         continue
     else:
         break
-    
+
 number = int(valid)
 def ask_question(question):
     print(question, 'Нажмите Да или Нет')
     answer = input().lower()
     if answer == 'да':
+        flag += 1
         return True
     else:
         return False
@@ -41,7 +43,7 @@ while True:
         continue
     else:
         break
-    
+
 lenght = int(valid)
 
 digits_enabled = ask_question('Включать ли цифры?')
@@ -76,16 +78,22 @@ if russian_uppercase_enabled:
     enabled_chars += russian_uppercase_letters
 if punctuations_enabled:
     enabled_chars += punctuations
-
+    
+if flag == 0:
+    print('Невозможно сформировать пароль, вы ответили "нет" на все вопросы')
+    
 for j in range(number):
     password = generate_password(lenght, enabled_chars)
     print(password)
 
 
+    
 print('Сгенерировать еще один пароль? Введите Да или Нет')
 again = input().lower()
 if again == 'да':
     password = generate_password(lenght, enabled_chars)
     print(password)    
-else:
+elif again == 'нет':
     print('Были рады вам помочь!')
+else:
+    print('Вы ввели неверный символ')
