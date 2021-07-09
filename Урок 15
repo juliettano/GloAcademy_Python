@@ -8,17 +8,18 @@ def update_user_word(secret_word, user_word, char):
     return new_user_word
 
 counter = 0
-alphabet = ["а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я"]
+alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]
 secret_word = 'вашингтон'
 user_word = '*********'
 print('Добро пожаловать в игру "Поле Чудес!"\nОтветьте пожалуйста на вопрос:\nКак называется столица Соединенных Штатов Америки?')
 while user_word != secret_word:
-    print('Введите букву')
+    print('Введите пожалуйста букву русского алфавита')
     user_char = input().lower()
     if user_char not in alphabet:
+        print('Буква была введена неверно')
         continue
-    if new_user_word.count(user_char):
-        counter = counter - 1
+    if user_char in user_word:
+        counter = 0
         print('Буква уже была введен ранее')
     else:
         counter += 1
@@ -28,7 +29,7 @@ while user_word != secret_word:
     new_user_word = update_user_word(secret_word, user_word, user_char)
 
     if user_word == new_user_word:
-        print('К сожалению такой буквы нет в слове')
+        print('Введите букву заново')
     else:
         print('Поздравляем, такая буква есть в слове')
 
@@ -40,8 +41,9 @@ print('Ура, вы угадали загаданное слово за', counte
 
 print('Хотите сыграть еще раз? Введите да или нет')
 again = input().lower()
-if again == 'да':
-    user_char = input().lower()
-    counter = 0   
-else:
-    print('Спасибо за игру!')
+while again == 'да':
+    against = update_user_word(secret_word, user_word, char)
+    counter = 0
+    if again == 'нет':
+        print('Спасибо за игру!')
+        break
