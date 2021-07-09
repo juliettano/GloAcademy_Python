@@ -1,48 +1,51 @@
-def update_user_word(secret_word, user_word, char):
-    new_user_word = ''
-    for i in range(len(secret_word)):
-        if secret_word[i] == char:
-            new_user_word += char
+def play():
+    def update_user_word(secret_word, user_word, char):
+        new_user_word = ''
+        for i in range(len(secret_word)):
+            if secret_word[i] == char:
+                new_user_word += char
+            else:
+                new_user_word += user_word[i]
+        return new_user_word
+
+    counter = 0
+    alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]
+    secret_word = 'вашингтон'
+    user_word = '*********'
+    print('Добро пожаловать в игру "Поле Чудес!"\nОтветьте пожалуйста на вопрос:\nКак называется столица Соединенных Штатов Америки?')
+    while user_word != secret_word:
+        print('Введите пожалуйста букву русского алфавита')
+        user_char = input().lower()
+        if user_char not in alphabet:
+            print('Буква была введена неверно')
+            continue
+        if user_char in user_word:
+            counter = 1
+            print('Буква уже была введена ранее')
         else:
-            new_user_word += user_word[i]
-    return new_user_word
+            counter += 1
+        if len(user_char) != 1:
+            continue
 
-counter = 0
-alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]
-secret_word = 'вашингтон'
-user_word = '*********'
-print('Добро пожаловать в игру "Поле Чудес!"\nОтветьте пожалуйста на вопрос:\nКак называется столица Соединенных Штатов Америки?')
-while user_word != secret_word:
-    print('Введите пожалуйста букву русского алфавита')
-    user_char = input().lower()
-    if user_char not in alphabet:
-        print('Буква была введена неверно')
-        continue
-    if user_char in user_word:
-        counter = 0
-        print('Буква уже была введен ранее')
-    else:
-        counter += 1
-    if len(user_char) != 1:
-        continue
+        new_user_word = update_user_word(secret_word, user_word, user_char)
 
-    new_user_word = update_user_word(secret_word, user_word, user_char)
+        if user_word == new_user_word:
+            print('Введите букву заново')
+        else:
+            print('Поздравляем, такая буква есть в слове')
 
-    if user_word == new_user_word:
-        print('Введите букву заново')
-    else:
-        print('Поздравляем, такая буква есть в слове')
+        user_word = new_user_word
 
-    user_word = new_user_word
+        print(user_word)
 
-    print(user_word)
-
-print('Ура, вы угадали загаданное слово за', counter, 'попыток')
+    print('Ура, вы угадали загаданное слово за', counter, 'попыток')
+    
+play()
 
 print('Хотите сыграть еще раз? Введите да или нет')
 again = input().lower()
-while again == 'да':
+if again == 'да':
+    play()
     counter = 0
-    if again == 'нет':
-        print('Спасибо за игру!')
-        break
+else:
+    print('Спасибо за игру!')
