@@ -42,7 +42,6 @@ print('Ура, вы угадали загаданное слово за', counte
 print('Хотите сыграть еще раз? Введите да или нет')
 again = input().lower()
 while again == 'да':
-    against = update_user_word(secret_word, user_word, char)
     counter = 0
     if again == 'нет':
         print('Спасибо за игру!')
