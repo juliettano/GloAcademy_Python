@@ -78,16 +78,17 @@ if russian_uppercase_enabled:
     enabled_chars += russian_uppercase_letters
 if punctuations_enabled:
     enabled_chars += punctuations
-    
+
 if flag == 0:
-    print('Невозможно сформировать пароль, вы ответили "нет" на все вопросы')
-    
+    number == 0
+    enabled_chars += digits
+    password = generate_password(lenght, enabled_chars)
+    print('Невозможно сформировать пароль- вы ответили "нет" на все вопросы, но мы сгенерировали пароль из цифр')
 for j in range(number):
     password = generate_password(lenght, enabled_chars)
     print(password)
 
 
-    
 print('Сгенерировать еще один пароль? Введите Да или Нет')
 again = input().lower()
 if again == 'да':
