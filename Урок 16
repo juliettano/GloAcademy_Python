@@ -80,9 +80,13 @@ def play():
 
 play()
 
-print('Хотите сыграть еще раз? Введите да или нет')
-again = input().lower()
-if again == 'да':
-    play()
-else:
-    print('Спасибо за игру!')
+while True:
+    print('Хотите сыграть еще раз? Введите да или нет')
+    again = input().lower()
+    if again == 'да':
+        play()
+    elif again == 'нет':
+        print('Спасибо за игру!')
+        break
+    else:
+        continue
