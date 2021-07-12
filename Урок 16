@@ -1,4 +1,4 @@
-ef play():
+def play():
     def is_valid(valid_row, valid_column):
         if valid_row.isdigit() and valid_column.isdigit():
             row = int(valid_row)
