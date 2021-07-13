@@ -9,7 +9,7 @@ def play():
             digits.pop(random_index)
 
         return secret_word
-    
+
     def calculate_bulls_count(user_word, secret_word):
         counter = 0
         for i in range(len(secret_word)):
@@ -22,15 +22,19 @@ def play():
             if secret_word[i] != user_word[i] and user_word[i] in secret_word:
                 counter += 1
         return counter
-    
+
     secret_word = generate_secret_word()
-    
     while True:
-        print('Найди число, задуманное компьютером')
+        print('Найди четырехзначное число, задуманное компьютером')
         user_word = input()
+        if not user_word.isdigit():
+            continue        
+        if len(user_word) != len(secret_word):
+            continue
+        
         bulls_count = calculate_bulls_count(user_word, secret_word)
         cows_count = calculate_cows_count(user_word, secret_word)
-        
+
         print(bulls_count, 'быков', cows_count, 'коров')
         if bulls_count == 4:
             print('УРА! Ты победил!')
@@ -48,3 +52,4 @@ while True:
         break
     else:
         continue
+
