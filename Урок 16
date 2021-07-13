@@ -9,7 +9,7 @@ def play():
                 return False
         else:
             return False
-        
+
     def create_field():
         field = []
         for i in range(3):
@@ -22,27 +22,27 @@ def play():
             for j in range(3):
                 print(field[i][j], end='')
             print()
-            
+
     def win(field):
         for i in range(3):
             if field[i][0] != '*' and field[i][0] == field[i][1] == field[i][2]:
                 return True
-            
+
         for i in range(3):
             if field[0][i] != '*' and field[0][i] == field[1][i] == field[2][i]:
                 return True
-            
+
         if field[0][0] != '*' and field[0][0] == field[1][1] == field[2][2]:
             return True
-        
+
         if field[0][2] != '*' and field[0][2] == field[1][1] == field[2][0]:
             return True
-        
+
         return False
     def end_game(field):
         if win(field):
             return True
-        
+
         for i in range(3):
             for j in range(3):
                 if field[i][j] == '*':
@@ -50,7 +50,7 @@ def play():
         return True
     
     field = create_field()
-
+    star = '*'
     current_symbol = 'X'
     number = [1, 2, 3]
     while not end_game(field):
@@ -60,18 +60,21 @@ def play():
         valid_column = input()
         if not is_valid(valid_row, valid_column):
             print('Введите пожалуйста цифру от 1 до 3')
-            continue
-        
+            continue          
+
         row = int(valid_row)
         column = int(valid_column)
-        
+        if star not in field[row - 1][column - 1]:
+            print('Ячейка занята!')
+            continue
         field[row - 1][column - 1] = current_symbol
-        
         if current_symbol == 'X':
             current_symbol = 'O'
         else:
             current_symbol = 'X'
-            
+        
+
+
     print_field(field)
     if current_symbol == 'X':
         print('Ура! Победил O')
