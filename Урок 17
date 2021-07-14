@@ -31,7 +31,9 @@ def play():
             continue        
         if len(user_word) != len(secret_word):
             continue
-        
+        for i in range(len(user_word)):
+            if user_word[i] == 1:
+                print('Цифра повторяется!Введите новое число')
         bulls_count = calculate_bulls_count(user_word, secret_word)
         cows_count = calculate_cows_count(user_word, secret_word)
 
@@ -52,4 +54,5 @@ while True:
         break
     else:
         continue
+
 
