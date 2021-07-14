@@ -24,6 +24,7 @@ def play():
         return counter
 
     secret_word = generate_secret_word()
+    flag=0
     while True:
         print('Найди четырехзначное число, задуманное компьютером')
         user_word = input()
@@ -32,8 +33,12 @@ def play():
         if len(user_word) != len(secret_word):
             continue
         for i in range(len(user_word)):
-            if user_word[i] == 1:
-                print('Цифра повторяется!Введите новое число')
+            for j in range(len(user_word)):
+                if i != j and a[i] == a[j]:
+                    flag += 1
+            break
+        if flag > 1:
+         continue
         bulls_count = calculate_bulls_count(user_word, secret_word)
         cows_count = calculate_cows_count(user_word, secret_word)
 
