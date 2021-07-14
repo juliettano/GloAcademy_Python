@@ -24,7 +24,7 @@ def play():
         return counter
 
     secret_word = generate_secret_word()
-    flag=0
+    print(secret_word)
     while True:
         print('Найди четырехзначное число, задуманное компьютером')
         user_word = input()
@@ -32,6 +32,7 @@ def play():
             continue        
         if len(user_word) != len(secret_word):
             continue
+        flag = 0
         for i in range(len(user_word)):
             for j in range(len(user_word)):
                 if i != j and user_word[i] == user_word[j]:
