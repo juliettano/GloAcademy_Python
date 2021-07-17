@@ -1,13 +1,18 @@
 def play():
     import random
+    import numpy as np
     name = input('Введите пожалуйста имя\n')
     questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?']
     answers = [6, 9, 25, 60, 2]
     categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
     count_right_answers = 0
-    random.shuffle(questions)
-    for i in range(len(questions)):
+    def unison_shuffled(questions, answers):
+        assert len(questions) == len(answers)
+        general = numpy.random.permutation(len(questions))
+        return questions[general], answers[general]
 
+    unison_shuffled(questions, answers)
+    for i in range(len(questions)):
         print(i + 1, '.', questions[i])
         user_answer = int(input('Ответ:'))
         right_answer = answers[i]
@@ -42,3 +47,4 @@ while True:
         break
     else:
         continue
+    
