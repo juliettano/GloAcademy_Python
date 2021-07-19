@@ -1,37 +1,37 @@
 def play():
-    import random
-    name = input('Введите пожалуйста имя\n')
-    questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?']
-    answers = [6, 9, 25, 60, 2]
-    categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
-    count_right_answers = 0
-    for i in range(len(questions)):
-        random_index = random.randint(0, len(questions) - 1)
-        print(i + 1, '.', questions[random_index])
-        user_answer = input('Ответ:')
+    import random  
+    def get_questions():
+        questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?']
+        return questions
+    
+    def calculate_result(count_right_answers):
+        categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
+        return categories_list[count_right_answers]
 
-        if user_answer.isdigit():
-            user_answer = int(user_answer)
-            count_right_answers += 1
+    def get_answers():
+        answers = [6, 9, 25, 60, 2]
+        return answers
+    while True:
+        questions = get_questions()
+        answers = get_answers()
+        count_right_answers = 0
+        name = input('Введите пожалуйста имя:\n')
+        for i in range(len(questions)):
+            print(f'Вопрос №{i+1}')
+            random_index = random.randint(0, len(questions) - 1)
+            print(questions[random_index])
+            
+            user_answer = int(input('Ответ:'))
+            
             right_answer = answers[random_index]
-
-        questions.pop(random_index)
-        answers.pop(random_index)
-    for i in range(len(categories_list)):
-        if count_right_answers == 0:
-            category = categories_list[0]
-        if count_right_answers == 1:
-            category = categories_list[1]
-        if count_right_answers == 2:
-            category = categories_list[2]
-        if count_right_answers == 3:
-            category = categories_list[3]
-        if count_right_answers == 4:
-            category = categories_list[4]
-        if count_right_answers == 5:
-            category = categories_list[5]
-
-    print(name, ',' 'количество правильных ответов=', count_right_answers, '.', 'Диагноз:', category)
+            if user_answer == right_answer:
+                count_right_answers += 1
+                
+            questions.pop(random_index)
+            answers.pop(random_index)
+            
+        category = calculate_result(count_right_answers)
+        print(name, ',' 'количество правильных ответов=', count_right_answers, '.', 'Диагноз:', category)
         
     
 play()
