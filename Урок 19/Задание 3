@@ -51,7 +51,6 @@ def play():
         answers.pop(random_index)
             
     category = calculate_result(count_right_answers)
-    print(name, ',' 'количество правильных ответов=', count_right_answers, '.', 'Диагноз:', category)
     file = open('table.txt', 'a')
     file.write(f'{name:5} {count_right_answers:5} {category:10}\n')
     file.close()
