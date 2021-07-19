@@ -5,16 +5,15 @@ def play():
     answers = [6, 9, 25, 60, 2]
     categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
     count_right_answers = 0
-    #list_new_questions = ''
     for i in range(len(questions)):
         random_index = random.randint(0, len(questions) - 1)
-        
         print(i + 1, '.', questions[random_index])
         user_answer = input('Ответ:')
         if user_answer.isdigit():
             user_answer = int(user_answer)
             count_right_answers += 1
         right_answer = answers[random_index]
+        
     for i in range(len(categories_list)):
         if count_right_answers == 0:
             category = categories_list[0]
@@ -44,4 +43,5 @@ while True:
         break
     else:
         continue
+    
     
