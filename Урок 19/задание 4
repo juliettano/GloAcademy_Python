@@ -79,7 +79,7 @@ while True:
         results = file.readlines()
         print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
         for i in range(len(results)):
-            strings = results[i].split()
+            strings = results[i].split('#')
             print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
         file.close()
         break
