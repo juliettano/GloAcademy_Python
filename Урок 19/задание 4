@@ -1,1 +1,84 @@
+def is_valid(valid):
+    if valid.isdigit():
+        user_answer = int(valid)
+        if user_answer > 0:
+            return True
+        else:
+            return False
+    else:
+        return False
+import random
+def get_questions():
+    questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?', 'Запасной вопрос']
+    return questions
+
+def calculate_result(count_right_answers):
+    categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
+    return categories_list[count_right_answers]
+
+def get_answers():
+    answers = [6, 9, 25, 60, 2, 1]
+    return answers
+def get_name():
+    name = input('Введите пожалуйста имя:\n')
+    return name
+def play():
+    questions = get_questions()
+    answers = get_answers()
+    name = get_name()
+    count_right_answers = 0
+    for i in range(5):
+        print(f'Вопрос №{i+1}')
+        random_index = random.randint(0, len(questions) - 1)
+        print(questions[random_index])
+        while True:
+            print('Введите ваш ответ:')
+            valid = input()
+            if is_valid(valid):
+                user_answer = int(valid)
+                break
+            else:
+                print('Пожалуйста, введите число!')
+                continue
+
+
+
+        right_answer = answers[random_index]
+        if user_answer == right_answer:
+            count_right_answers += 1
+            
+                
+        questions.pop(random_index)
+        answers.pop(random_index)
+
+    category = calculate_result(count_right_answers)
+
+    file = open('table.txt', 'a')
+    file.write(f'{name:7} {count_right_answers:7} {category:10}\n')
+    file.close()    
+    
+play()
+
+
+while True:
+    print('Хотите сыграть еще раз? Введите да или нет')
+    again = input().lower()
+    if again == 'да':
+        print(f'{"Имя":7}{"Баллы":7}{"Результат":10}')
+        file = open('table.txt', 'r')
+        s = file.read()
+        print(s)
+        file.close()        
+        play()
+    elif again == 'нет':
+        print('Спасибо за игру!')
+        print(f'{"Имя":7}{"Баллы":7}{"Результат":10}')
+        file = open('table.txt', 'r')
+        s = file.read()
+        print(s)
+        file.close()        
+        break
+    else:
+        continue
+
 
