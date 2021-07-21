@@ -11,11 +11,7 @@ import random
 def get_questions():
     questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?', 'Запасной вопрос']
     return questions
-
-def calculate_result(persents):
-    categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
-    persents = count_right_answers * 100 // count_of_questions
-    return categories_list[persents // 20]
+persents = 0
 
 def get_answers():
     answers = [6, 9, 25, 60, 2, 1]
@@ -24,6 +20,11 @@ def get_name():
     name = input('Введите пожалуйста имя:\n')
     return name
 def play():
+    def calculate_result(persents):
+        categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
+        persents = count_right_answers * 100 // count_of_questions
+        return categories_list[persents // 20]
+    
     questions = get_questions()
     answers = get_answers()
     name = get_name()
@@ -59,6 +60,7 @@ def play():
     
 play()
 
+
 while True:
     print('Хотите сыграть еще раз? Введите да или нет')
     again = input().lower()
@@ -79,7 +81,5 @@ while True:
         break
     else:
         continue
-
-
 
 
