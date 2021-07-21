@@ -12,9 +12,10 @@ def get_questions():
     questions = ['Сколько будет два плюс два умноженное на два?', 'Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 'На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 'Пять свечей горело, две потухли. Сколько свечей осталось?', 'Запасной вопрос']
     return questions
 
-def calculate_result(count_right_answers):
+def calculate_result(persents):
     categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
-    return categories_list[count_right_answers]
+    persents = count_right_answers * 100 // count_of_questions
+    return categories_list[persents // 20]
 
 def get_answers():
     answers = [6, 9, 25, 60, 2, 1]
@@ -27,10 +28,12 @@ def play():
     answers = get_answers()
     name = get_name()
     count_right_answers = 0
-    for i in range(5):
+    count_of_questions = 0
+    for i in range(len(questions)):
         print(f'Вопрос №{i+1}')
         random_index = random.randint(0, len(questions) - 1)
         print(questions[random_index])
+        count_of_questions += 1
         while True:
             print('Введите ваш ответ:')
             valid = input()
@@ -41,24 +44,20 @@ def play():
                 print('Пожалуйста, введите число!')
                 continue
 
-
-
         right_answer = answers[random_index]
         if user_answer == right_answer:
             count_right_answers += 1
-            
-                
+
         questions.pop(random_index)
         answers.pop(random_index)
-
-    category = calculate_result(count_right_answers)
+        
+    category = calculate_result(persents)
 
     file = open('table.txt', 'a')
-    file.write(f'{name:7} {count_right_answers:7} {category:10}\n')
+    file.write(f'{name}#{count_right_answers}#{category}\n')
     file.close()    
     
 play()
-
 
 while True:
     print('Хотите сыграть еще раз? Введите да или нет')
@@ -68,7 +67,7 @@ while True:
         file = open('table.txt', 'r')
         s = file.read()
         print(s)
-        file.close()        
+        file.close()
         play()
     elif again == 'нет':
         print('Спасибо за игру!')
@@ -80,5 +79,7 @@ while True:
         break
     else:
         continue
+
+
 
 
