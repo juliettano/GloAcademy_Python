@@ -65,21 +65,23 @@ while True:
     print('Хотите сыграть еще раз? Введите да или нет')
     again = input().lower()
     if again == 'да':
-        print(f'{"Имя":7}{"Баллы":7}{"Результат":10}')
         file = open('table.txt', 'r')
-        s = file.read()
-        print(s)
+        results = file.readlines()
+        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
+        for i in range(len(results)):
+            strings = results[i].split()
+            print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
         file.close()
         play()
     elif again == 'нет':
         print('Спасибо за игру!')
-        print(f'{"Имя":7}{"Баллы":7}{"Результат":10}')
         file = open('table.txt', 'r')
-        s = file.read()
-        print(s)
-        file.close()        
+        results = file.readlines()
+        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
+        for i in range(len(results)):
+            strings = results[i].split()
+            print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
+        file.close()
         break
     else:
         continue
-
-
