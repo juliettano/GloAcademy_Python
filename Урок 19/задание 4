@@ -55,7 +55,7 @@ def play():
     category = calculate_result(persents)
 
     file = open('table.txt', 'a')
-    file.write(f'{name}#{count_right_answers}#{category}\n')
+    file.write(f'{name}#{count_right_answers}#{category}#\n')
     file.close()    
     
 play()
@@ -70,7 +70,7 @@ while True:
         print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
         for i in range(len(results)):
             strings = results[i].split()
-            print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
+            print(strings)
         file.close()
         play()
     elif again == 'нет':
