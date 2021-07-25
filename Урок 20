@@ -1,0 +1,94 @@
+def is_valid(valid):
+    if valid.isdigit():
+        user_answer = int(valid)
+        if user_answer > 0:
+            return True
+        else:
+            return False
+    else:
+        return False
+import random
+
+class Question:
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer    
+            
+def get_questions():
+    questions = [Question('Сколько будет два плюс два умноженное на два?', 6), 
+                 Question('Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 9), 
+                 Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
+                 Question('Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 60), 
+                 Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
+    return questions
+questions = get_questions()
+persents = 0
+def get_name():
+    name = input('Введите пожалуйста имя:\n')
+    return name
+def play():
+    def calculate_result(persents):
+        categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
+        persents = count_right_answers * 100 // count_of_questions
+        return categories_list[persents // 20]
+
+    name = get_name()
+    count_right_answers = 0
+    count_of_questions = 0
+    question = Question('Это вопрос?', 5)
+    print(question.text)
+    print(question.answer)
+    for i in range(len(questions)):
+        print(f'Вопрос №{i+1}')
+        random_index = random.randint(0, len(questions) - 1)
+        print(questions[random_index].text)
+        count_of_questions += 1
+        while True:
+            print('Введите ваш ответ:')
+            valid = input()
+            if is_valid(valid):
+                user_answer = int(valid)
+                break
+            else:
+                print('Пожалуйста, введите число!')
+                continue
+
+        right_answer = questions[random_index].answer
+        if user_answer == right_answer:
+            count_right_answers += 1
+
+        questions.pop(random_index)
+
+    category = calculate_result(persents)
+
+    file = open('table.txt', 'a')
+    file.write(f'{name}#{count_right_answers}#{category}#\n')
+    file.close()    
+    
+play()
+
+
+while True:
+    print('Хотите сыграть еще раз? Введите да или нет')
+    again = input().lower()
+    if again == 'да':
+        file = open('table.txt', 'r')
+        results = file.readlines()
+        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
+        for i in range(len(results)):
+            strings = results[i].split()
+            print(strings)
+        file.close()
+        play()
+    elif again == 'нет':
+        print('Спасибо за игру!')
+        file = open('table.txt', 'r')
+        results = file.readlines()
+        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
+        for i in range(len(results)):
+            strings = results[i].split('#')
+            print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
+        file.close()
+        break
+    else:
+        continue
