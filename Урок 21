@@ -116,12 +116,15 @@ def show_user_results():
         print(f'{user.name:15}{user.count_right_answers:30}{user.result:15}')
 
 def add_new_question():
-    print('Введите текст вопроса')
-    text = input()
-    print('Введите ответ на вопрос')
-    answer = get_user_answer()
-    new_question = Question(text, answer)
-    questionsStorage.add(new_question)
+    while True:       
+        print('Введите текст вопроса')
+        text = input()
+        if len(text) < 1:
+            continue
+        print('Введите ответ на вопрос')
+        answer = get_user_answer()
+        new_question = Question(text, answer)
+        questionsStorage.add(new_question)
     
 def print_question(questions):
     print('------------------------------------------')
