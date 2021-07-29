@@ -135,14 +135,14 @@ def remove_question():
     while True:
         print('Выберите номер вопроса, который надо удалить')
 
-        print_questions(questions)
+        print_question(questions)
         user_answer = get_user_answer()
         if user_answer < 1 or user_answer > len(questions):
             continue
 
         questionsStorage.remove(user_answer - 1)
 
-        rint(f'Ура!Вопрос под номером {user_answer} успешно удален')
+        print(f'Ура!Вопрос под номером {user_answer} успешно удален')
         break
 file_provider = FileProvider()
 questionsStorage = QuestionsStorage()
