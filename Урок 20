@@ -1,94 +1,126 @@
-def is_valid(valid):
-    if valid.isdigit():
-        user_answer = int(valid)
-        if user_answer > 0:
-            return True
-        else:
-            return False
-    else:
-        return False
 import random
+
+class FileProvider:
+    def get(self, path):
+        file = open(file_name, 'r')
+        data = file.read()
+        file.close()
+        return data
+    def append(self, path):
+        file = open(path, 'a')
+        data = file.write(data)
+        file.close()     
 
 class Question:
     def __init__(self, text, answer):
         self.text = text
-        self.answer = answer    
-            
-def get_questions():
-    questions = [Question('Сколько будет два плюс два умноженное на два?', 6), 
-                 Question('Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 9), 
-                 Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
-                 Question('Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 60), 
-                 Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
-    return questions
-questions = get_questions()
-persents = 0
-def get_name():
-    name = input('Введите пожалуйста имя:\n')
-    return name
-def play():
-    def calculate_result(persents):
-        categories_list = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
-        persents = count_right_answers * 100 // count_of_questions
-        return categories_list[persents // 20]
+        self.answer = answer
+class QuestionsStorage:
+    
+    def get_all(self):
+        questions = [Question('Сколько будет два плюс два умноженное на два?', 6),
+                     Question('Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 9),
+                     Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
+                     Question('Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 60),
+                     Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
+        return questions
+    
+class User:
+    def __init__(self, name, count_right_answers=0, result='Неизвестно'):
+        self.name = name
+        self.count_right_answers = count_right_answers
+        self.result = result
+        
+    def accept_right_answer(self):
+        self.count_right_answers += 1
 
-    name = get_name()
-    count_right_answers = 0
-    count_of_questions = 0
-    question = Question('Это вопрос?', 5)
-    print(question.text)
-    print(question.answer)
+    def set_result(self, result):
+        self.result = result
+
+class UsersResultStorage:
+    def safe(self, user):
+        file_name = 'table.txt'
+        data = f'{user.name}#{user.count_right_answers}#{user.result}\n'
+        file_provider = FileProvider()
+        file_provider.append(file_name, data)
+
+    def get_all(self):
+        file_name = 'table.txt'
+        file_provider = FileProvider()
+        data = file_provider.get(file_name).strip('\n')
+        data=data.split('\n')
+        users = []
+
+        for line in data:
+            values = line.split('#')
+            user = User(values[0], values[1], values[2])
+            users.append(user)
+        return users
+
+def calculate_result(count_right_answers, count_questions):
+    right_answers_percent = count_right_answers * 100 // count_questions
+    results = ['Без комментариев', 'Ужасно', 'Плохо', 'Удовлетворительно', 'Хорошо', 'Отлично']
+    return results[right_answers_percent // 20]
+
+def get_user_answer():
+    user_input = input()
+
+    while not user_input.isdigit():
+        print('Введите число!')
+        user_input = input()
+
+        return int(user_input)
+def show_user_results():
+    name = 'Имя'
+    count_right_answers = 'Кол-во правильных ответов'
+    result = 'Результат'
+    print(f'{name:15}{count_right_answers:30}{result:15}')
+    users = usersResultStorage.get_all()
+    for user in users:
+        print(f'{user.name[0]:15}{user.count_right_answers[1]:30}{user.result[2]:15}')
+
+questionsStorage = QuestionsStorage()
+usersResultStorage = UsersResultStorage()
+while True:
+
+    questions = questionsStorage.get_all()
+    count_questions = len(questions)
+    
+    print('Здравствуте! Как Вас зовут?')
+    
+    user_name = input()
+    user = User(user_name)
     for i in range(len(questions)):
         print(f'Вопрос №{i+1}')
+        
         random_index = random.randint(0, len(questions) - 1)
         print(questions[random_index].text)
-        count_of_questions += 1
-        while True:
-            print('Введите ваш ответ:')
-            valid = input()
-            if is_valid(valid):
-                user_answer = int(valid)
-                break
-            else:
-                print('Пожалуйста, введите число!')
-                continue
-
+        
+        user_answer=get_user_answer()
         right_answer = questions[random_index].answer
+        
         if user_answer == right_answer:
-            count_right_answers += 1
+            user.accept_right_answer()
 
         questions.pop(random_index)
 
-    category = calculate_result(persents)
+    print('Количество правильных ответов=', user.count_right_answers)
 
-    file = open('table.txt', 'a')
-    file.write(f'{name}#{count_right_answers}#{category}#\n')
-    file.close()    
+    result = calculate_result(user.count_right_answers, count_questions)
+    user.set_result(result)
+    print(f'{user_name}, ваш результат: {result} ')
+
+    usersResultStorage.safe(user)
+
+    print('Хотите посмотреть результаты предыдущих игр? Для этого ответьте слово ДА')
+    user_answer = input()
     
-play()
+    if user_answer.upper() == 'ДА':
+        show_user_results()
+        
+    print('Хотите сыграть заново? Для этого ответьте слово ДА')
+    user_answer = input()
 
-
-while True:
-    print('Хотите сыграть еще раз? Введите да или нет')
-    again = input().lower()
-    if again == 'да':
-        file = open('table.txt', 'r')
-        results = file.readlines()
-        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
-        for i in range(len(results)):
-            strings = results[i].split()
-            print(strings)
-        file.close()
-        play()
-    elif again == 'нет':
-        print('Спасибо за игру!')
-        file = open('table.txt', 'r')
-        results = file.readlines()
-        print(f'{"Имя":10}{"Баллы":10}{"Результат":10}')
-        for i in range(len(results)):
-            strings = results[i].split('#')
-            print(f'{strings[0]:10}{strings[1]:10}{strings[2]:10}')
-        file.close()
+    if user_answer.upper() != 'ДА':
         break
-    else:
-        continue
+
