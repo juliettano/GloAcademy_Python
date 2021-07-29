@@ -25,7 +25,7 @@ class QuestionsStorage:
                      Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
         return questions
 class User:
-    def __init__(self, name, count_right_answers=0, result='Неизвестно'):
+    def __init__(self, name, count_right_answers = 0, result='Неизвестно'):
         self.name = name
         self.count_right_answers = count_right_answers
         self.result = result
