@@ -6,7 +6,7 @@ class FileProvider:
         data = file.read()
         file.close()
         return data
-    def append(self, path):
+    def append(self, path, data):
         file = open(path, 'a')
         data = file.write(data)
         file.close()     
@@ -123,4 +123,6 @@ while True:
 
     if user_answer.upper() != 'ДА':
         break
+
+
 
