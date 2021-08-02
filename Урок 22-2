@@ -77,18 +77,27 @@ class User:
         self.result = result
 
 class UsersResultStorage:
-    def safe(self, user):
+    
+    def __init__(self):
         self.file_name = 'table.json'
-        data = user.name, user.count_right_answers, user.result
-        file_provider = FileProvider()
-        file_provider.append(self.file_name, data)
+        
+    def safe_result(self, users):
+        json_data = jsonpickle.encode(users)
+        FileProvider.update_file(self.file_name, json_data)
         
     def get_all(self):
-        self.file_name = 'table.json'
-        file_provider = FileProvider()
-        data = file_provider.get(self.file_name)
-        
+        if not FileProvider.exist(self.file_name):
+            users = []
+            self.safe_result(users)
+        data = FileProvider.read_file(self.file_name)
+        users = jsonpickle.decode(data)
         return users
+
+    def add_user(self, user):
+        users = self.get_all()
+        users.append(user)
+        self.safe_result(users)
+    
 
 def calculate_result(count_right_answers, count_questions):
     right_answers_percent = count_right_answers * 100 // count_questions
