@@ -1,1 +1,212 @@
+import random
+import os
+import jsonpickle
 
+class FileProvider:
+    def get(self, path):
+        file = open(path, 'r')
+        data = file.read()
+        file.close()
+        return data
+    
+    def append(self, path, data):
+        file = open(path, 'a')
+        data = file.write(data)
+        file.close()
+        
+    def writelines(self, path, data):
+        file = open(path, 'w')
+        data = file.writelines(data)
+        file.close()
+        
+    def clear(self, path):
+        file = open(path, 'w')
+        data = file.write('')
+        file.close()
+        
+    def exists(self, path):
+        return os.path.exists(path)
+
+class Question:
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+        
+class QuestionsStorage:
+    def __init__(self):
+        self.file_name = 'questions.json'
+        
+    def get_all(self):
+        if not file_provider.exists(self.file_name):
+            questions = [Question('Сколько будет два плюс два умноженное на два?', 6),
+                     Question('Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 9),
+                     Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
+                     Question('Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 60),
+                     Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
+            self.safe_questions(questions)
+
+        data = file_provider.get(self.file_name)
+        questions = jsonpickle.decode(data)
+        return questions
+    
+    def safe_questions(self, questions):
+        json_data = jsonpickle.encode(questions)
+        file_provider.writelines(self.file_name, json_data)
+        
+    def add(self, question):
+        questions = self.get_all()
+        questions.append(question)
+        self.safe_questions(questions)
+
+    def remove(self, index):
+        questions = self.get_all()
+        questions.pop(index)
+        self.safe_questions(questions)
+
+        
+class User:
+    def __init__(self, name, count_right_answers=0, result='Неизвестно'):
+        self.name = name
+        self.count_right_answers = count_right_answers
+        self.result = result
+        
+    def accept_right_answer(self):
+        self.count_right_answers += 1
+
+    def set_result(self, result):
+        self.result = result
+
+class UsersResultStorage:
+    def safe(self, user):
+        file_name = 'table.txt'
+        data = f'{user.name}#{user.count_right_answers}#{user.result}\n'
+        file_provider = FileProvider()
+        file_provider.append(file_name, data)
+
+    def get_all(self):
+        file_name = 'table.txt'
+        file_provider = FileProvider()
+        data = file_provider.get(file_name).strip('\n')
+        data=data.split('\n')
+        users = []
+
+        for line in data:
+            values = line.split('#')
+            user = User(values[0], values[1], values[2])
+            users.append(user)
+        return users
+
+def calculate_result(count_right_answers, count_questions):
+    right_answers_percent = count_right_answers * 100 // count_questions
+    results = ['Без комментариев', 'Ужасно', 'Плохо', 'Удовлетворительно', 'Хорошо', 'Отлично']
+    return results[right_answers_percent // 20]
+
+def get_user_answer():
+    user_input = input()
+
+    while not user_input.isdigit():
+        print('Введите число!')
+        user_input = input()
+
+    return int(user_input)
+def show_user_results():
+    name = 'Имя'
+    count_right_answers = 'Кол - во правильных ответов'
+    result = 'Результат'
+    print(f'{name:15}{count_right_answers:30}{result:15}')
+    users = usersResultStorage.get_all()
+    for user in users:
+        print(f'{user.name:15}{user.count_right_answers:30}{user.result:15}')
+
+def add_new_question():
+    while True:       
+        print('Введите текст вопроса')
+        text = input()
+        if len(text) < 1:
+            continue
+        print('Введите ответ на вопрос')
+        answer = get_user_answer()
+        new_question = Question(text, answer)
+        questionsStorage.add(new_question)
+    
+def print_question(questions):
+    print('------------------------------------------')
+    for i in range(len(questions)):
+        print(f'{i+1}.{questions[i].text}')
+        
+    print('------------------------------------------')
+
+def remove_question():
+    questions = questionsStorage.get_all()
+    while True:
+        print('Выберите номер вопроса, который надо удалить')
+
+        print_question(questions)
+        user_answer = get_user_answer()
+        if user_answer < 1 or user_answer > len(questions):
+            continue
+
+        questionsStorage.remove(user_answer - 1)
+
+        print(f'Ура!Вопрос под номером {user_answer} успешно удален')
+        break
+file_provider = FileProvider()
+questionsStorage = QuestionsStorage()
+usersResultStorage = UsersResultStorage()
+
+jsonpickle.set_encoder_options('json', indent=4,
+                               separators=(',', ': '),
+                               ensure_ascii=False)
+
+while True:
+
+    questions = questionsStorage.get_all()
+    count_questions = len(questions)
+    
+    print('Здравствуте! Как Вас зовут?')
+    
+    user_name = input()
+    user = User(user_name)
+    for i in range(len(questions)):
+        print(f'Вопрос №{i+1}')
+        
+        random_index = random.randint(0, len(questions) - 1)
+        print(questions[random_index].text)
+        
+        user_answer=get_user_answer()
+        right_answer = questions[random_index].answer
+        
+        if user_answer == right_answer:
+            user.accept_right_answer()
+
+        questions.pop(random_index)
+
+    print('Количество правильных ответов=', user.count_right_answers)
+
+    result = calculate_result(user.count_right_answers, count_questions)
+    user.set_result(result)
+    print(f'{user_name}, ваш результат: {result} ')
+
+    usersResultStorage.safe(user)
+
+    print('Хотите посмотреть результаты предыдущих игр? Для этого ответьте слово ДА')
+    user_answer = input()
+    
+    if user_answer.upper() == 'ДА':
+        show_user_results()
+        
+    print('Хотите добавить новый вопрос? Для этого ответьте слово ДА')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        add_new_question()
+
+    print('Хотите удалить вопрос? Для этого ответьте слово ДА')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        remove_question()
+        
+    print('Хотите сыграть заново? Для этого ответьте слово ДА')
+    user_answer = input()
+
+    if user_answer.upper() != 'ДА':
+        break
