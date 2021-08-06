@@ -11,13 +11,15 @@ class Ball:
         self.center_x = 100
         self.center_y = 100
         self.radius = 30
+        self.vx = 2
+        self.vy = 2
         
     def show(self):
         pygame.draw.circle(self.display, self.color, (self.center_x, self.center_y), self.radius)
 
     def go(self):
-        self.center_x += 3
-        self.center_y += 3
+        self.center_x += self.vx
+        self.center_y += self.vy
         
     def clear(self):
         pygame.draw.circle(self.display, pygame.Color('white'), (self.center_x, self.center_y), self.radius)
@@ -26,6 +28,10 @@ class Ball:
         self.clear()
         self.go()
         self.show()
+
+    def stop(self):
+        self.vx = 0
+        self.vy = 0
 
 class RandomPointBall(Ball):
     def __init__(self, display):
@@ -45,6 +51,13 @@ class PointBall(Ball):
         self.center_x = x
         self.center_y = y
 
+class RandomPointMovableBall(RandomPointBall):
+    def __init__(self, display):
+        super().__init__(display)
+
+        self.vx = random.randint(-3, 3)
+        self.vy = random.randint(-3, 3)
+        
 pygame.init()
 
 width = 700
@@ -52,21 +65,16 @@ heigh = 400
 display = pygame.display.set_mode((width, heigh))
 
 display.fill((pygame.Color('white')))
-
-ball = Ball(display)
-ball.show()
-randomPointBall = RandomPointBall(display)
-randomPointBall.show()
+balls = []
+for i in range(10):    
+    ball = RandomPointMovableBall(display)
+    ball.show()
+    balls.append(ball)
 pygame.display.flip()
 
 time.sleep(2)
 
-for i in range(50):
-    randomPointBall.move()
-    pygame.display.flip()
-
-
-
+clock = pygame.time.Clock()
 while True:
     event_list = pygame.event.get()
     for event in event_list:
@@ -74,9 +82,10 @@ while True:
             pygame.quit()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            x = event.pos[0]
-            y = event.pos[1]
-            ball = PointBall(display, x, y)
-            ball.show()
-
+            for ball in balls:
+                ball.stop()
+    for ball in balls:
+        ball.move()
+        
     pygame.display.flip()
+    clock.tick(80)
