@@ -1,0 +1,82 @@
+import pygame
+
+import random
+
+import time
+
+class Ball:
+    def __init__(self, display):
+        self.display = display
+        self.color = pygame.Color('red')
+        self.center_x = 100
+        self.center_y = 100
+        self.radius = 30
+        
+    def show(self):
+        pygame.draw.circle(self.display, self.color, (self.center_x, self.center_y), self.radius)
+
+    def go(self):
+        self.center_x += 3
+        self.center_y += 3
+        
+    def clear(self):
+        pygame.draw.circle(self.display, pygame.Color('white'), (self.center_x, self.center_y), self.radius)
+        
+    def move(self):
+        self.clear()
+        self.go()
+        self.show()
+
+class RandomPointBall(Ball):
+    def __init__(self, display):
+        super().__init__(display)
+        
+        self.color = pygame.Color('blue')
+        width, heigh = display.get_size()
+
+        self.center_x = random.randint(self.radius, width - self.radius)
+        self.center_y = random.randint(self.radius, heigh - self.radius)
+
+class PointBall(Ball):
+    def __init__(self, display, x, y):
+        super().__init__(display)
+        self.color = pygame.Color('yellow')
+
+        self.center_x = x
+        self.center_y = y
+
+pygame.init()
+
+width = 700
+heigh = 400
+display = pygame.display.set_mode((width, heigh))
+
+display.fill((pygame.Color('white')))
+
+ball = Ball(display)
+ball.show()
+randomPointBall = RandomPointBall(display)
+randomPointBall.show()
+pygame.display.flip()
+
+time.sleep(2)
+
+for i in range(50):
+    randomPointBall.move()
+    pygame.display.flip()
+
+
+
+while True:
+    event_list = pygame.event.get()
+    for event in event_list:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x = event.pos[0]
+            y = event.pos[1]
+            ball = PointBall(display, x, y)
+            ball.show()
+
+    pygame.display.flip()
