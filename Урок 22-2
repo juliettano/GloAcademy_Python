@@ -86,10 +86,10 @@ class UsersResultStorage:
         file_provider.writelines(self.file_name, json_data)
         
     def get_all(self):
-        if not FileProvider.exists(self.file_name):
+        if not file_provider.exists(self.file_name):
             users = []
             self.safe_result(users)
-        data = FileProvider.read_file(self.file_name)
+        data = file_provider.get(self.file_name)
         users = jsonpickle.decode(data)
         return users
 
@@ -131,7 +131,7 @@ def add_new_question():
         answer = get_user_answer()
         new_question = Question(text, answer)
         questionsStorage.add(new_question)
-    
+        break
 def print_question(questions):
     print('------------------------------------------')
     for i in range(len(questions)):
@@ -190,7 +190,7 @@ while True:
     user.set_result(result)
     print(f'{user_name}, ваш результат: {result} ')
 
-    usersResultStorage.safe(user)
+    usersResultStorage.add_user(user)
 
     print('Хотите посмотреть результаты предыдущих игр? Для этого ответьте слово ДА')
     user_answer = input()
