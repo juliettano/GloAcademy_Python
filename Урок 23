@@ -110,7 +110,7 @@ while True:
     for ball in balls:
         ball.move()
               
-    print_text('Очки: ' + str(scores), 300, 10)
+    print_text('Шары: ' + str(scores), 300, 10)
     pygame.display.flip()
     clock.tick(80)
 
