@@ -41,6 +41,8 @@ class Ball:
             True
         if self.center_y - self.radius < 0:
             True
+            
+        return True
 
 class RandomPointBall(Ball):
     def __init__(self, display):
@@ -96,10 +98,11 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for ball in balls:
                 ball.stop()
-        if ball.coordinates() == True:
-            scores += 1
+        
     for ball in balls:
         ball.move()
+        if ball.coordinates() == True:
+            scores += 1        
         
     pygame.display.flip()
     clock.tick(80)
