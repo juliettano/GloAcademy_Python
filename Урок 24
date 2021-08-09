@@ -83,7 +83,6 @@ class BillyardBalll(RandomPointMovableBall):
 
         if self.center_y <= self.radius or self.center_y >= heigh - self.radius:
             self.vy = -self.vy
-            hits += 1
 
 
 
