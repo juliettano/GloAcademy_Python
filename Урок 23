@@ -79,6 +79,13 @@ display = pygame.display.set_mode((width, heigh))
 
 display.fill((pygame.Color('white')))
 
+font_name = pygame.font.match_font('arial')
+
+def print_text(text, x, y, font_color=(0, 0, 0), font_size=30):
+    font = pygame.font.Font(font_name, font_size)
+    message = font.render(text, True, font_color)
+    display.blit(message, (x, y))
+
 balls = []
 for i in range(10):    
     ball = RandomPointMovableBall(display)
@@ -98,18 +105,12 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for ball in balls:
                 ball.stop()
-        
+                if ball.coordinates() == True:
+                    scores += 1                  
     for ball in balls:
         ball.move()
-        if ball.coordinates() == True:
-            scores += 1        
-        
+              
+    print_text('Очки: ' + str(scores), 300, 10)
     pygame.display.flip()
     clock.tick(80)
-font_name = pygame.font.match_font('arial')
-def print_text(text, x, y, font_color=(0, 0, 0), font_size=30):
-    font = pygame.font.Font(font_name, font_size)
-    message = font.render(text, True, font_color)
-    display.blit(message, x, y)
 
-print_text('Количество: ' + str(scores), 600, 10)
