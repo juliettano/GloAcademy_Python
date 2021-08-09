@@ -33,10 +33,14 @@ class Ball:
         self.vx = 0
         self.vy = 0
     def coordinates(self):
-        self.center_x + self.radius > width
-        self.center_y + self.radius > heigh
-        self.center_x - self.radius < 0
-        self.center_y - self.radius < 0
+        if self.center_x + self.radius > width:
+            True
+        if self.center_y + self.radius > heigh:
+            True
+        if self.center_x - self.radius < 0:
+            True
+        if self.center_y - self.radius < 0:
+            True
 
 class RandomPointBall(Ball):
     def __init__(self, display):
