@@ -32,6 +32,17 @@ class Ball:
     def stop(self):
         self.vx = 0
         self.vy = 0
+    def coordinates(self):
+        if self.center_x + self.radius > width:
+            False
+        elif self.center_y + self.radius > heigh:
+            False
+        elif self.center_x - self.radius < 0:
+            False
+        elif self.center_y - self.radius < 0:
+            False
+        else:
+            return True  
 
 class RandomPointBall(Ball):
     def __init__(self, display):
@@ -56,7 +67,9 @@ class RandomPointMovableBall(RandomPointBall):
         super().__init__(display)
         self.vx = random.randint(-3, 3)
         self.vy = random.randint(-3, 3)
-
+        while self.vx == 0 and self.vy== 0:
+            self.vx = random.randint(-3, 3)
+            self.vy = random.randint(-3, 3)
 class BillyardBalll(RandomPointMovableBall):
     def __init__(self, display):
         super().__init__(display)
@@ -66,16 +79,30 @@ class BillyardBalll(RandomPointMovableBall):
         width, heigh = self.display.get_size()
         if self.center_x <= self.radius or self.center_x >= width - self.radius:
             self.vx = -self.vx
+            hits += 1
+
         if self.center_y <= self.radius or self.center_y >= heigh - self.radius:
             self.vy = -self.vy
+            hits += 1
+
+
 
 pygame.init()
 scores = 0
+hits = 0
 width = 700
 heigh = 400
 display = pygame.display.set_mode((width, heigh))
 
 display.fill((pygame.Color('white')))
+
+font_name = pygame.font.match_font('arial')
+
+def print_text(text, x, y, font_color=(0, 0, 0), font_size=30):
+    font = pygame.font.Font(font_name, font_size)
+    message = font.render(text, True, font_color, (255, 255, 255))
+    display.blit(message, (x, y))
+
 
 balls = []
 for i in range(5):
@@ -85,7 +112,7 @@ for i in range(5):
 
     ball = BillyardBalll(display)
     ball.show()
-    balls.append(ball)    
+    balls.append(ball)
     
 pygame.display.flip()
 
@@ -101,10 +128,13 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for ball in balls:
                 ball.stop()
+                if ball.coordinates() == True:
+                    scores += 1                  
     for ball in balls:
         ball.move()
-        
-    pygame.display.flip()
-    clock.tick(80)
 
+    print_text('Шары: ' + str(scores), 150, 10)
+    print_text('Удары: ' + str(scores), 350, 10)
+    pygame.display.flip()
+    clock.tick(50)
 
