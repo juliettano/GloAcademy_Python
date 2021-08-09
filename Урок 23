@@ -83,8 +83,9 @@ font_name = pygame.font.match_font('arial')
 
 def print_text(text, x, y, font_color=(0, 0, 0), font_size=30):
     font = pygame.font.Font(font_name, font_size)
-    message = font.render(text, True, font_color)
+    message = font.render(text, True, font_color, (255, 255, 255))
     display.blit(message, (x, y))
+
 
 balls = []
 for i in range(10):    
@@ -109,8 +110,9 @@ while True:
                     scores += 1                  
     for ball in balls:
         ball.move()
-              
-    print_text('Шары: ' + str(scores), 300, 10)
+
+    print_text('Очки: ' + str(scores), 300, 10)
     pygame.display.flip()
-    clock.tick(80)
+    clock.tick(50)
+
 
