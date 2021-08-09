@@ -76,6 +76,7 @@ class BillyardBalll(RandomPointMovableBall):
         self.color = pygame.Color('green')
     def go(self):
         super().go()
+        global hits
         width, heigh = self.display.get_size()
         if self.center_x <= self.radius or self.center_x >= width - self.radius:
             self.vx = -self.vx
@@ -134,7 +135,8 @@ while True:
         ball.move()
 
     print_text('Шары: ' + str(scores), 150, 10)
-    print_text('Удары: ' + str(scores), 350, 10)
+    print_text('Удары: ' + str(hits), 350, 10)
     pygame.display.flip()
     clock.tick(50)
+
 
