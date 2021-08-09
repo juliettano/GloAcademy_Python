@@ -32,6 +32,11 @@ class Ball:
     def stop(self):
         self.vx = 0
         self.vy = 0
+    def coordinates(self):
+        self.center_x + self.radius > width
+        self.center_y + self.radius > heigh
+        self.center_x - self.radius < 0
+        self.center_y - self.radius < 0
 
 class RandomPointBall(Ball):
     def __init__(self, display):
@@ -54,17 +59,23 @@ class PointBall(Ball):
 class RandomPointMovableBall(RandomPointBall):
     def __init__(self, display):
         super().__init__(display)
-
         self.vx = random.randint(-3, 3)
         self.vy = random.randint(-3, 3)
-        
-pygame.init()
+        while True:
+            if self.vx and self.vy != 0:
+                break
+            else:
+                continue
 
+
+pygame.init()
+scores = 0
 width = 700
 heigh = 400
 display = pygame.display.set_mode((width, heigh))
 
 display.fill((pygame.Color('white')))
+
 balls = []
 for i in range(10):    
     ball = RandomPointMovableBall(display)
@@ -84,8 +95,17 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for ball in balls:
                 ball.stop()
+        if ball.coordinates() == True:
+            scores += 1
     for ball in balls:
         ball.move()
         
     pygame.display.flip()
     clock.tick(80)
+font_name = pygame.font.match_font('arial')
+def print_text(text, x, y, font_color=(0, 0, 0), font_size=30):
+    font = pygame.font.Font(font_name, font_size)
+    message = font.render(text, True, font_color)
+    display.blit(message, x, y)
+
+print_text('Количество: ' + str(scores), 600, 10)
