@@ -62,7 +62,7 @@ class RandomPointMovableBall(RandomPointBall):
         self.vx = random.randint(-3, 3)
         self.vy = random.randint(-3, 3)
         while True:
-            if self.vx and self.vy != 0:
+            if self.vx != 0 and self.vy!= 0:
                 break
             else:
                 continue
