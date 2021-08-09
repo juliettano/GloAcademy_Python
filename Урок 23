@@ -33,7 +33,7 @@ class Ball:
         self.vx = 0
         self.vy = 0
     def coordinates(self):
-        if self.center_x + self.radius > width:
+        if self.center_x + self.radius < width:
             True
         if self.center_y + self.radius > heigh:
             True
@@ -65,12 +65,9 @@ class RandomPointMovableBall(RandomPointBall):
         super().__init__(display)
         self.vx = random.randint(-3, 3)
         self.vy = random.randint(-3, 3)
-        while True:
-            if self.vx != 0 and self.vy!= 0:
-                break
-            else:
-                continue
-
+        while self.vx == 0 and self.vy== 0:
+            self.vx = random.randint(-3, 3)
+            self.vy = random.randint(-3, 3)
 
 pygame.init()
 scores = 0
