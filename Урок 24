@@ -76,21 +76,31 @@ class BillyardBalll(RandomPointMovableBall):
         self.color = pygame.Color('green')
     def go(self):
         super().go()
-        global hits
+        global hits_left
+        global hits_right
+        global hits_up
+        global hits_down
         width, heigh = self.display.get_size()
-        if self.center_x <= self.radius or self.center_x >= width - self.radius:
+        if self.center_x <= self.radius:
             self.vx = -self.vx
-            hits += 1
+            hits_left += 1
+        elif self.center_x >= width - self.radius:
+            self.vx = -self.vx
+            hits_right += 1
 
-        if self.center_y <= self.radius or self.center_y >= heigh - self.radius:
+        elif self.center_y <= self.radius:
             self.vy = -self.vy
-            hits += 1
-
-
+            hits_up += 1
+        elif self.center_y >= heigh - self.radius:
+            self.vy = -self.vy
+            hits_down += 1
 
 pygame.init()
 scores = 0
-hits = 0
+hits_left = 0
+hits_right = 0
+hits_up = 0
+hits_down = 0
 width = 700
 heigh = 400
 display = pygame.display.set_mode((width, heigh))
@@ -134,9 +144,11 @@ while True:
     for ball in balls:
         ball.move()
 
-    print_text('Шары: ' + str(scores), 150, 10)
-    print_text('Удары: ' + str(hits), 350, 10)
+    print_text('Шары: ' + str(scores), 10, 10)
+    print_text('Удары: ' + str(hits_left), 10, 150)
+    print_text('Удары: ' + str(hits_right), 570, 150)
+    print_text('Удары: ' + str(hits_up), 300, 10)
+    print_text('Удары: ' + str(hits_down), 300, 350)
     pygame.display.flip()
     clock.tick(50)
-
 
