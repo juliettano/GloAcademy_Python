@@ -1,4 +1,4 @@
-def play():
+def weather():
     import requests
     import json
     print('Добро пожаловать в наш сервис проверки текущей погоды по названию города!')
@@ -15,23 +15,20 @@ def play():
 
     url = f'https://api.weatherbit.io/v2.0/current?city={user_city}&key={apikey}'
     r = requests.get(url)
-    print(r.json()["data"][0]["temp"])
-    #i_need_this_dict = r.json()["data"][0]
-    #key = "temp"
-    # for key in i_need_this_dict:
-        #print(key, i_need_this_dict[key])
-play()
+    print('В городе', user_city, 'температура воздуха', r.json()["data"][0]["temp"], 'градусов по Цельсию.')
+weather()
 
 while True:
     print('Хотите проверить погоду в другом городе? Введите Да или Нет')
     repeated_request = input().lower()
     if repeated_request == 'да':
-        play()
+        weather()
     elif repeated_request == 'нет':
         print('Были рады вам помочь!')
         break
     else:
         print('Вы ввели неверный символ')
         continue
+
 
 
