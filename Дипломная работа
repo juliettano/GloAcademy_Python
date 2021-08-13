@@ -1,18 +1,45 @@
-while True:
-    print('Введите пожалуйста название города')
-    user_char_town = input().lower()
-    list_user_char_town = list(user_char_town)
-    print(list_user_char_town)
-    counter = 0
-    alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]    
-    c = []
-    for i in list_user_char_town:
-        if i in c:
-            continue        
-        for j in alphabet:
-            if i == j:
+import requests
+apikey = ''
+units = 'metric'
+def play():
+    print('Добро пожаловать в нас сервис проверки текущей погоды по названию города!')
+    while True:
+        print('Введите пожалуйста название города')
+        user_char_town = input().lower()
+        list_user_char_town = list(user_char_town)
+        print(list_user_char_town)
+        counter = 0
+        alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я", "-"]
+        new_list_user_char_town = []
+        for i in list_user_char_town:
+            if i in new_list_user_char_town:
+                new_list_user_char_town.append(i)
                 counter += 1
-                c.append(i)
-                break
-    if counter > 1:
+                continue        
+            for j in alphabet:
+                if i == j:
+                    counter += 1
+                    new_list_user_char_town.append(i)
+                    break
+        print(new_list_user_char_town, counter)
+        if counter > 1 and counter == len(user_char_town):
+            break
+    user_town = ''.join(new_list_user_char_town)
+    print(user_town)
+
+play()
+
+while True:
+    print('Хотите проверить погоду в другом городе? Введите Да или Нет')
+    repeated_request = input().lower()
+    # if len(repeated_request) != 1:
+            #continue
+    if repeated_request == 'да':
+        play()
+    elif repeated_request == 'нет':
+        print('Были рады вам помочь!')
         break
+    else:
+        print('Вы ввели неверный символ')
+        continue
+
