@@ -1,5 +1,8 @@
+#import requests
+apikey = ''
+units = 'metric'
 def play():
-    print('Добро пожаловать в нас сервис проверки текущей погоды по названию города!')
+    print('Добро пожаловать в наш сервис проверки текущей погоды по названию города!')
     while True:
         print('Введите пожалуйста название города')
         user_char_town = input().lower()
@@ -14,8 +17,6 @@ play()
 while True:
     print('Хотите проверить погоду в другом городе? Введите Да или Нет')
     repeated_request = input().lower()
-    if len(repeated_request) != 1:
-            continue
     if repeated_request == 'да':
         play()
     elif repeated_request == 'нет':
