@@ -1,0 +1,18 @@
+while True:
+    print('Введите пожалуйста название города')
+    user_char_town = input().lower()
+    list_user_char_town = list(user_char_town)
+    print(list_user_char_town)
+    counter = 0
+    alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]    
+    c = []
+    for i in list_user_char_town:
+        if i in c:
+            continue        
+        for j in alphabet:
+            if i == j:
+                counter += 1
+                c.append(i)
+                break
+    if counter > 1:
+        break
