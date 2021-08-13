@@ -1,17 +1,19 @@
-#import requests
-apikey = ''
-units = 'metric'
 def play():
+    import requests
     print('Добро пожаловать в наш сервис проверки текущей погоды по названию города!')
+    apikey = '32345c0a94c84a8cbec7e1955f0be05c'
     while True:
         print('Введите пожалуйста название города')
-        user_char_town = input().lower()
-        if user_char_town.isdigit():
+        user_city = input().lower()
+        if user_city.isdigit():
             continue
-        if len(user_char_town) < 1:  # проверка на наличие пустой строки
+        if len(user_city) < 1:
             continue
         else:
             break
+    url = f'https://api.weatherbit.io/v2.0/current?city=user_city&key=32345c0a94c84a8cbec7e1955f0be05c'
+    r = requests.get(url)
+    print(r.json()['data'], ['temp'])
 play()
 
 while True:
