@@ -1,5 +1,6 @@
 def play():
     import requests
+    import json
     print('Добро пожаловать в наш сервис проверки текущей погоды по названию города!')
     apikey = '32345c0a94c84a8cbec7e1955f0be05c'
     while True:
@@ -11,9 +12,14 @@ def play():
             continue
         else:
             break
-    url = f'https://api.weatherbit.io/v2.0/current?city=user_city&key=32345c0a94c84a8cbec7e1955f0be05c'
+
+    url = f'https://api.weatherbit.io/v2.0/current?city={user_city}&key={apikey}'
     r = requests.get(url)
-    print(r.json()['data'], ['temp'])
+    print(r.json()["data"][0]["temp"])
+    #i_need_this_dict = r.json()["data"][0]
+    #key = "temp"
+    # for key in i_need_this_dict:
+        #print(key, i_need_this_dict[key])
 play()
 
 while True:
@@ -27,3 +33,5 @@ while True:
     else:
         print('Вы ввели неверный символ')
         continue
+
+
