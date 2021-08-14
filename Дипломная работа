@@ -3,19 +3,22 @@ def weather():
     import json
     print('Добро пожаловать в наш сервис проверки текущей погоды по названию города!')
     apikey = '32345c0a94c84a8cbec7e1955f0be05c'
-    while True:
-        print('Введите пожалуйста название города')
-        user_city = input().lower()
-        if user_city.isdigit():
-            continue
-        if len(user_city) < 1:
-            continue
-        else:
-            break
+    try:
+        while True:
+            print('Введите пожалуйста название города')
+            user_city = input().lower()
+            if user_city.isdigit():
+                continue
+            if len(user_city) < 1:
+                continue
+            else:
+                break
 
-    url = f'https://api.weatherbit.io/v2.0/current?city={user_city}&key={apikey}'
-    r = requests.get(url)
-    print('В городе', user_city, 'температура воздуха', r.json()["data"][0]["temp"], 'градусов по Цельсию.')
+        url = f'https://api.weatherbit.io/v2.0/current?city={user_city}&key={apikey}'
+        r = requests.get(url)
+        print('В городе', user_city, 'температура воздуха', r.json()["data"][0]["temp"], 'градусов по Цельсию', 'на дату', r.json()["data"][0]["datetime"])
+    except:
+        print('Вы ввели неверное название города')
 weather()
 
 while True:
